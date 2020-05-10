@@ -17,9 +17,14 @@ io.on("connection", (socket) => {
     clearInterval(interval)
   }
   interval = setInterval(() => getApiAndEmit(socket), 1000)
+
   socket.on("disconnect", () => {
     console.log(`Client ${socket.id} disconnected`)
     clearInterval(interval)
+  })
+
+  socket.on('pomodoroCompleted', (type) => {
+     console.log(`A pomodoro of type ${type.toUpperCase()} has been completed.`)
   })
 })
 
